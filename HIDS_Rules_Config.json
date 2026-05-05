@@ -1,0 +1,140 @@
+{
+    "logs": {
+        "watchdog_log": "HIDS_Log.txt",
+        "process_log": "Process_Log.txt",
+        "hash_storage": "HIDS_Hash.txt",
+        "alerts_csv": "Suspicious_Alerts.csv",
+        "alerts_db": "Suspicious_Alerts.db",
+        "windows_event_log": "Windows_Event_Log.txt",
+        "windows_event_state": "Windows_Event_State.json"
+    },
+
+    "watchdog": {
+        "file_size_limit_mb": 100,
+
+        "important_paths": [
+            "%USERPROFILE%\\Downloads",
+            "%USERPROFILE%\\Desktop",
+            "%USERPROFILE%\\Documents",
+            "%APPDATA%",
+            "%LOCALAPPDATA%\\Temp",
+            "%PROGRAMDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+            "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+            "%WINDIR%\\System32\\drivers\\etc"
+        ],
+
+        "suspicious_file_types": [
+            ".exe",
+            ".dll",
+            ".bat",
+            ".cmd",
+            ".ps1",
+            ".vbs",
+            ".js",
+            ".jar",
+            ".scr",
+            ".msi",
+            ".reg",
+            ".lnk"
+        ],
+        "ignored_paths": [
+            "%USERPROFILE%\\Desktop\\HIDS\\HIDS\\Units\\Loki",
+            "%USERPROFILE%\\Desktop\\HIDS\\HIDS\\Units\\Loki_Log.txt",
+            "%APPDATA%\\Microsoft\\Windows\\Recent\\Loki_Log.lnk",
+            "%APPDATA%\\Microsoft\\Windows\\Recent"
+        ]
+    },
+
+    "process": {
+        "check_interval_seconds": 3,
+        "recheck_time_seconds": 300,
+
+        "cpu_percent_limit": 80.0,
+        "memory_percent_limit": 80.0,
+
+        "suspicious_process_names": [
+            "powershell.exe",
+            "cmd.exe",
+            "wscript.exe",
+            "cscript.exe",
+            "mshta.exe",
+            "rundll32.exe",
+            "regsvr32.exe",
+            "certutil.exe",
+            "bitsadmin.exe",
+            "schtasks.exe"
+        ],
+
+        "suspicious_paths": [
+            "\\appdata\\roaming",
+            "\\appdata\\local\\temp",
+            "\\downloads",
+            "\\perflogs",
+            "\\users\\public",
+            "\\windows\\tasks",
+            "\\windows\\security",
+            "\\windows\\debug",
+            "\\windows\\temp",
+            "\\windows\\logs",
+            "\\windows\\shellexperiences"
+        ]
+    },
+
+    "windows_events": {
+        "check_interval_seconds": 10,
+
+        "logs_to_check": {
+            "Security": {
+                "4625": "Failed logon attempt",
+                "4672": "Special privileges assigned to new logon",
+                "4688": "New process created",
+                "4697": "Service installed",
+                "4698": "Scheduled task created",
+                "4720": "User account created",
+                "4722": "User account enabled",
+                "4728": "User added to global group",
+                "4732": "User added to local group",
+                "4740": "User account locked out",
+                "1102": "Security audit log cleared"
+            },
+
+            "System": {
+                "7045": "New service installed",
+                "6008": "Unexpected shutdown",
+                "7036": "Service state changed"
+            },
+
+            "Application": {
+                "1000": "Application error",
+                "1001": "Windows error reporting"
+            },
+
+            "Windows PowerShell": {
+                "400": "PowerShell engine started",
+                "403": "PowerShell engine stopped",
+                "600": "PowerShell provider started"
+            }
+        }
+    },
+    
+    "loki": {
+        "enabled": true,
+        "log_file": "Loki_Log.txt",
+        "python_executable": "python",
+        "loki_script_path": "C:\\Users\\natro\\Desktop\\HIDS\\HIDS\\Units\\Loki\\loki.py",
+        "scan_timeout_seconds": 120,
+
+        "ignore_error_contains": [
+            "invalid field name \"number_of_signatures\"",
+            "SyntaxWarning",
+            "DeprecationWarning",
+            "Traceback",
+            "yara.SyntaxError",
+            "initialize_yara_rules",
+            "compiledRules",
+            "dummy"
+        ],
+
+    "max_errors_to_log": 5
+    }
+}
