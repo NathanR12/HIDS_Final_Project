@@ -1,2 +1,1 @@
-# HIDS_Final_Project
-Final code save for HIDS
+#INFO ON LOKI AND STARTUP
